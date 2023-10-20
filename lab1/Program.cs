@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.RegularExpressions;
 
 namespace lab1 
 {
@@ -6,14 +7,58 @@ namespace lab1
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Enter your name:");
-            string name = Console.ReadLine();
+            string name = "";
+            string email = "";
+            string phoneNumber = "";
+            bool isValidNumber = false;
+            bool isValidName = false;
+            bool isValidEmail = false;
 
-            Console.WriteLine("Enter your email:");
-            string email = Console.ReadLine();
+            while (!isValidName)
+            {
+                Console.WriteLine("Enter your name:");
+                name = Console.ReadLine();
 
-            Console.WriteLine("Enter your phone number:");
-            string phoneNumber = Console.ReadLine();
+                if (string.IsNullOrWhiteSpace(name))
+                {
+                    Console.WriteLine("Invalid entered name");
+                }
+                else
+                {
+                    isValidName = true;
+                }
+            }
+
+
+            while (!isValidEmail)
+            {
+                Console.WriteLine("Enter your email:");
+                email = Console.ReadLine();
+
+                if (string.IsNullOrWhiteSpace(email))
+                {
+                    Console.WriteLine("Invalid entered email");
+                }
+                else
+                {
+                    isValidEmail = true;
+                }
+            }
+            
+            while (!isValidNumber)
+            {
+                Console.WriteLine("Enter your phone number:");
+                phoneNumber = Console.ReadLine();
+
+                if (!Regex.IsMatch(phoneNumber, @"^[0-9]{10}$"))
+                {
+                    Console.WriteLine("Invalid phone number");
+                }
+                else
+                {
+                    isValidNumber = true;
+                }
+            }
 
             ClientCard card = new ClientCard(name, email, phoneNumber);
 
